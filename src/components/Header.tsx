@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import {useGame} from "../context/GameContext.ts";
-import {Icon, IconButton} from "@mui/material";
+import {IconButton} from "@mui/material";
 import {Info, Home} from "@mui/icons-material";
 
 const Header = () => {
@@ -63,14 +63,6 @@ const Header = () => {
             }
         })
     }
-
-    /*
-        useEffect(() => {
-            console.log('save', JSON.stringify(game));
-            localStorage.setItem('game', JSON.stringify(game));
-        }, [game.balance]);
-    */
-
 
     function handleSave() {
         console.log('save', JSON.stringify(game));

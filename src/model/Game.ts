@@ -3,4 +3,6 @@ export type Game = {
     upgrades: Record<number, number>
     unlockedStocks: boolean
     unlockedRoulette: boolean
+    unlockedResearch: boolean
+    researches: Record<number, number>
 }

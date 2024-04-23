@@ -14,7 +14,7 @@ const StocksTable = () => {
     return (
         <Box sx={{
             width: {lg: '100%'},
-            mt: 2,
+            mt: 3,
             bgcolor: "lightgray",
             borderRadius: {lg: 5, xs: 3},
         }}>

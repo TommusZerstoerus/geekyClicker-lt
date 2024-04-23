@@ -28,7 +28,8 @@ const Header = () => {
                 9: 0
             },
             unlockedStocks: false,
-            unlockedRoulette: false
+            unlockedRoulette: false,
+            unlockedResearch: false
         });
     }
 
@@ -80,7 +81,7 @@ const Header = () => {
                 <Toolbar sx={{backgroundColor: '#909090'}}>
                     <IconButton onClick={redirect}><Home/></IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1, ml: 2}}>
-                        Willkommen
+                        Geeky Clicker
                     </Typography>
                     <IconButton sx={{mr: '20px'}} onClick={showInfo}><Info/></IconButton>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleSave}>Speichern</Button>

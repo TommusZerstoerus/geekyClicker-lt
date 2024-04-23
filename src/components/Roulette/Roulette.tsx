@@ -59,14 +59,10 @@ const RouletteTable = () => {
             } else if (randomOutcome >= 0.97 && selectedColor == Color.green) {
                 winGame(Color.green);
             } else {
-                loseGame()
+                setLost(true)
             }
             setSpinning(false)
         }, 5000)
-    }
-
-    const loseGame = () => {
-        setLost(true)
     }
 
     const winGame = (color: Color) => {
@@ -98,10 +94,9 @@ const RouletteTable = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            mt: 5,
+            mt: 3,
             p: 2
         }}>
-            <Typography>Roulette</Typography>
             <TextField
                 label="Einsatz"
                 type="number"

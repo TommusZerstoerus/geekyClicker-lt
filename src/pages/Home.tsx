@@ -2,7 +2,6 @@ import {Container} from "@mui/material";
 import Header from "../components/Header.tsx";
 import ClickUpgradeList from "../components/ClickUpgradeList.tsx";
 import IncomeUpgradeList from "../components/IncomeUpgradeList.tsx";
-import {useClient} from "../context/ClientContext.ts";
 import Box from "@mui/material/Box";
 import icon from "../assets/icon.svg";
 import {useEffect, useState} from "react";
@@ -16,6 +15,7 @@ import {ShoppingCart} from "@mui/icons-material";
 import PassiveIncome from "../components/Home/PassiveIncome.tsx";
 import ActiveIncome from "../components/Home/ActiveIncome.tsx";
 import RouletteTable from "../components/Roulette/Roulette.tsx";
+import Research from "../components/Research/Research.tsx";
 
 const Home = () => {
     const [clickBonus, setClickBonus] = useState(0);
@@ -47,40 +47,56 @@ const Home = () => {
         setGame({...game, unlockedRoulette: true, balance: game.balance - 10000})
     }
 
+    const unlockResearch = () => {
+        setGame({...game, unlockedResearch: true, balance: game.balance - 1000000})
+    }
+
     function calcBonus(id: number) {
         const mileStones = Math.floor(game.upgrades[id] / 100)
         return Math.floor(game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones)
     }
 
     useEffect(() => {
-            const savedUpgrades: Record<number, number> = {}
-            savedUpgrades[0] = 1
-            savedUpgrades[1] = 0
-            savedUpgrades[2] = 0
-            savedUpgrades[3] = 0
-            savedUpgrades[4] = 0
-            savedUpgrades[5] = 0
-            savedUpgrades[6] = 0
-            savedUpgrades[7] = 0
-            savedUpgrades[8] = 0
-            savedUpgrades[9] = 0
+        const defualtUpgrades: Record<number, number> = {}
+        defualtUpgrades[0] = 1
+        defualtUpgrades[1] = 0
+        defualtUpgrades[2] = 0
+        defualtUpgrades[3] = 0
+        defualtUpgrades[4] = 0
+        defualtUpgrades[5] = 0
+        defualtUpgrades[6] = 0
+        defualtUpgrades[7] = 0
+        defualtUpgrades[8] = 0
+        defualtUpgrades[9] = 0
 
-            const loadedData = JSON.parse(localStorage.getItem('game'))
-            if (loadedData) {
-                setGame({
-                    balance: loadedData.balance,
-                    upgrades: loadedData.upgrades,
-                    unlockedStocks: loadedData.unlockedStocks,
-                    unlockedRoulette: loadedData.unlockedRoulette
-                })
-            } else {
-                setGame({
-                    balance: game.balance,
-                    upgrades: savedUpgrades,
-                    unlockedStocks: false,
-                    unlockedRoulette: false
-                });
-            }
+        const defaultResearchList: Record<number, number> = {}
+        defaultResearchList[0] = 0
+        defaultResearchList[1] = 0
+        defaultResearchList[2] = 0
+        defaultResearchList[3] = 0
+        defaultResearchList[4] = 0
+
+        const data = localStorage.getItem('game')
+        if (data) {
+            const loadedData = JSON.parse(data)
+            setGame({
+                balance: loadedData.balance,
+                upgrades: loadedData.upgrades,
+                unlockedStocks: loadedData.unlockedStocks,
+                unlockedRoulette: loadedData.unlockedRoulette,
+                unlockedResearch: loadedData.unlockedResearch,
+                researches: loadedData.researches
+            })
+        } else {
+            setGame({
+                balance: game.balance,
+                upgrades: defualtUpgrades,
+                unlockedStocks: false,
+                unlockedRoulette: false,
+                unlockedResearch: false,
+                researches: {}
+            });
+        }
     }, []);
 
     useEffect(() => {
@@ -118,6 +134,7 @@ const Home = () => {
             <Box sx={{display: "flex", justifyContent: "center", flexWrap: "wrap"}}>
                 <Container sx={{
                     maxWidth: "100%",
+
                     textAlign: "center",
                     flex: "1",
                     display: "flex",
@@ -146,16 +163,25 @@ const Home = () => {
                             <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 {game.unlockedRoulette && <RouletteTable/>}
                                 {!game.unlockedRoulette &&
-                                    <Button sx={{mt: 5, width: '50%'}} disabled={game.balance <= 10000} startIcon={<ShoppingCart/>}
+                                    <Button sx={{mt: 3, width: '60%'}} disabled={game.balance <= 10000}
+                                            startIcon={<ShoppingCart/>}
                                             variant="contained" color="secondary" onClick={unlockRoulette}>Schalte
                                         Roulette frei
                                         ({formatNumber(10000)}€)</Button>}
                                 {game.unlockedStocks && <StocksTable/>}
                                 {!game.unlockedStocks &&
-                                    <Button sx={{mt: 5, width: '50%'}} disabled={game.balance <= 100000} startIcon={<ShoppingCart/>}
+                                    <Button sx={{mt: 3, width: '60%'}} disabled={game.balance <= 100000}
+                                            startIcon={<ShoppingCart/>}
                                             variant="contained" color="secondary" onClick={unlockStocks}>Schalte Aktien
                                         frei
                                         ({formatNumber(100000)}€)</Button>}
+                                {game.unlockedResearch && <Research/>}
+                                {!game.unlockedResearch &&
+                                    <Button sx={{mt: 3, width: '60%'}} disabled={game.balance <= 1000000}
+                                            startIcon={<ShoppingCart/>}
+                                            variant="contained" color="secondary" onClick={unlockResearch}>Schalte Forschung
+                                        frei
+                                        ({formatNumber(1000000)}€)</Button>}
                             </Box>
                         </Box>
                     </Container>

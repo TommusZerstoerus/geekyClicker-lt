@@ -17,13 +17,11 @@ import ActiveIncome from "../components/Home/ActiveIncome.tsx";
 import RouletteTable from "../components/Roulette/Roulette.tsx";
 import ResearchList from "../components/Research/ResearchList.tsx";
 import {researchList} from "../model/ResearchList.ts";
-import {Research} from "../model/Research.ts";
 
 const Home = () => {
     const [clickBonus, setClickBonus] = useState(0);
     const [incomeBonus, setIncomeBonus] = useState(0);
     const [wobble, setWobble] = useState(false)
-    const [boughtResearches, setBoughtResearches] = useState<Record<number, Research>>([])
     const {game, setGame} = useGame()
 
     const {transform} = useSpring({
@@ -37,7 +35,6 @@ const Home = () => {
         },
         config: {duration: 100, easing: t => t},
     });
-    console.log("Bought Researches",boughtResearches)
 
     const handleClick = () => {
         setGame({...game, balance: game.balance + clickBonus});
@@ -56,31 +53,31 @@ const Home = () => {
     }
 
     function calcBonus(id: number) {
-        const filteredResearchList = researchList.filter(research => research.upgradeId == id).
-        console.log("Filtered Research List",filteredResearchList)
-        const mileStones = Math.floor(game.upgrades[id] / 100)
-        return Math.floor(game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones)
+        const mileStones = Math.floor(game.upgrades[id] / 100);
+        if (game.researches) {
+            const boughtUpgrade = researchList.find(research => research.upgradeId === id && game.researches[research.id]);
+            if (boughtUpgrade) {
+                console.log(boughtUpgrade);
+                console.log(id, "Upgrade", Math.floor((game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones) * boughtUpgrade.bonus), "No Upgrade", Math.floor(game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones));
+                console.log("UpgradeId", id, "bonus", boughtUpgrade.bonus, "Research Upgrade id", boughtUpgrade.upgradeId);
+                return Math.floor((game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones) * boughtUpgrade.bonus);
+            }
+        }
+        return Math.floor(game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones);
     }
 
     useEffect(() => {
-        if(game.researches !== undefined) {
-            const filteredResearches = researchList.filter(research => game.researches[research.id])
-            setBoughtResearches(filteredResearches)
-        }
-    }, [game.researches]);
-
-    useEffect(() => {
-        const defualtUpgrades: Record<number, number> = {}
-        defualtUpgrades[0] = 1
-        defualtUpgrades[1] = 0
-        defualtUpgrades[2] = 0
-        defualtUpgrades[3] = 0
-        defualtUpgrades[4] = 0
-        defualtUpgrades[5] = 0
-        defualtUpgrades[6] = 0
-        defualtUpgrades[7] = 0
-        defualtUpgrades[8] = 0
-        defualtUpgrades[9] = 0
+        const defaultUpgrades: Record<number, number> = {}
+        defaultUpgrades[0] = 1
+        defaultUpgrades[1] = 0
+        defaultUpgrades[2] = 0
+        defaultUpgrades[3] = 0
+        defaultUpgrades[4] = 0
+        defaultUpgrades[5] = 0
+        defaultUpgrades[6] = 0
+        defaultUpgrades[7] = 0
+        defaultUpgrades[8] = 0
+        defaultUpgrades[9] = 0
 
         const defaultResearchList: Record<number, boolean> = {}
         defaultResearchList[0] = false
@@ -107,7 +104,7 @@ const Home = () => {
         } else {
             setGame({
                 balance: game.balance,
-                upgrades: defualtUpgrades,
+                upgrades: defaultUpgrades,
                 unlockedStocks: false,
                 unlockedRoulette: false,
                 unlockedResearch: false,
@@ -143,7 +140,7 @@ const Home = () => {
             calcBonus(8) +
             calcBonus(9)
         setIncomeBonus(Math.floor(incomeBonus))
-    }, [game.upgrades]);
+    }, [game.upgrades, game.researches]);
 
     return (
         <>
@@ -196,7 +193,8 @@ const Home = () => {
                                 {!game.unlockedResearch &&
                                     <Button sx={{mt: 3, width: '60%'}} disabled={game.balance <= 1000000}
                                             startIcon={<ShoppingCart/>}
-                                            variant="contained" color="secondary" onClick={unlockResearch}>Schalte Forschung
+                                            variant="contained" color="secondary" onClick={unlockResearch}>Schalte
+                                        Forschung
                                         frei
                                         ({formatNumber(1000000)}€)</Button>}
                             </Box>

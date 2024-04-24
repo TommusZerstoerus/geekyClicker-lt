@@ -7,7 +7,7 @@ export const researchList = [
         price: BasePriceList[0] * 10000,
         description: 'Werde zum Kotlin-König und lerne doppelt so schnell!',
         bonusText: 'Kotlin lernen Bonus x 2',
-        upgradeId: 1,
+        upgradeId: 0,
         bonus: 2
     },
     {
@@ -16,7 +16,7 @@ export const researchList = [
         price: BasePriceList[2] * 5000,
         description: 'Was waren nochmal Merge Konflikte?',
         bonusText: 'Merge Konflikte lösen Bonus x 3',
-        upgradeId: 3,
+        upgradeId: 2,
         bonus: 3
     },
     {

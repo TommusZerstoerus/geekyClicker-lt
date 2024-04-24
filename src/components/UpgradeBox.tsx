@@ -89,7 +89,7 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
                     {name}
                 </Typography>
                 <Typography variant="body2">
-                    {type === UpgradeType.CLICK ? `(+${UpgradeBonusList[id]}€)` : `(+${formatNumber(UpgradeBonusList[id])}€/s)`}
+                    {type === UpgradeType.CLICK ? `(+${formatNumber(UpgradeBonusList[id])}€)` : `(+${formatNumber(UpgradeBonusList[id])}€/s)`}
                 </Typography>
                 <Typography variant="body2">
                     Stufe {level}

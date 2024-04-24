@@ -15,12 +15,15 @@ import {ShoppingCart} from "@mui/icons-material";
 import PassiveIncome from "../components/Home/PassiveIncome.tsx";
 import ActiveIncome from "../components/Home/ActiveIncome.tsx";
 import RouletteTable from "../components/Roulette/Roulette.tsx";
-import Research from "../components/Research/Research.tsx";
+import ResearchList from "../components/Research/ResearchList.tsx";
+import {researchList} from "../model/ResearchList.ts";
+import {Research} from "../model/Research.ts";
 
 const Home = () => {
     const [clickBonus, setClickBonus] = useState(0);
     const [incomeBonus, setIncomeBonus] = useState(0);
     const [wobble, setWobble] = useState(false)
+    const [boughtResearches, setBoughtResearches] = useState<Record<number, Research>>([])
     const {game, setGame} = useGame()
 
     const {transform} = useSpring({
@@ -34,6 +37,7 @@ const Home = () => {
         },
         config: {duration: 100, easing: t => t},
     });
+    console.log("Bought Researches",boughtResearches)
 
     const handleClick = () => {
         setGame({...game, balance: game.balance + clickBonus});
@@ -52,9 +56,18 @@ const Home = () => {
     }
 
     function calcBonus(id: number) {
+        const filteredResearchList = researchList.filter(research => research.upgradeId == id).
+        console.log("Filtered Research List",filteredResearchList)
         const mileStones = Math.floor(game.upgrades[id] / 100)
         return Math.floor(game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones)
     }
+
+    useEffect(() => {
+        if(game.researches !== undefined) {
+            const filteredResearches = researchList.filter(research => game.researches[research.id])
+            setBoughtResearches(filteredResearches)
+        }
+    }, [game.researches]);
 
     useEffect(() => {
         const defualtUpgrades: Record<number, number> = {}
@@ -69,12 +82,16 @@ const Home = () => {
         defualtUpgrades[8] = 0
         defualtUpgrades[9] = 0
 
-        const defaultResearchList: Record<number, number> = {}
-        defaultResearchList[0] = 0
-        defaultResearchList[1] = 0
-        defaultResearchList[2] = 0
-        defaultResearchList[3] = 0
-        defaultResearchList[4] = 0
+        const defaultResearchList: Record<number, boolean> = {}
+        defaultResearchList[0] = false
+        defaultResearchList[1] = false
+        defaultResearchList[2] = false
+        defaultResearchList[3] = false
+        defaultResearchList[4] = false
+        defaultResearchList[5] = false
+        defaultResearchList[6] = false
+        defaultResearchList[7] = false
+        defaultResearchList[8] = false
 
         const data = localStorage.getItem('game')
         if (data) {
@@ -175,7 +192,7 @@ const Home = () => {
                                             variant="contained" color="secondary" onClick={unlockStocks}>Schalte Aktien
                                         frei
                                         ({formatNumber(100000)}€)</Button>}
-                                {game.unlockedResearch && <Research/>}
+                                {game.unlockedResearch && <ResearchList/>}
                                 {!game.unlockedResearch &&
                                     <Button sx={{mt: 3, width: '60%'}} disabled={game.balance <= 1000000}
                                             startIcon={<ShoppingCart/>}

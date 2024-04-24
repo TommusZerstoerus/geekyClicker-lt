@@ -4,4 +4,6 @@ export type Research = {
     name: string
     description: string
     bonusText: string
+    upgradeId: number
+    bonus: number
 }

@@ -10,16 +10,20 @@ type ResearchProps = {
     research: Research
 }
 const ResearchBox = ({research}: ResearchProps) => {
-    const {game} = useGame()
+    const {game, setGame} = useGame()
 
     const unlockResearch = () => {
-        console.log("Bought", research.id)
+        setGame({
+            ...game,
+            balance: game.balance - research.price,
+            researches: {...game.researches, [research.id]: true}
+        })
     }
 
 
     return (
         <Box sx={{background: "darkgray", borderRadius: {lg: 5, xs: 3}, width: '100%'}}>
-            <Typography variant='subtitle1'>{research.name}</Typography>
+            <Typography variant='subtitle1'>{research.name} researchId:{research.id} upgradeid:{research.upgradeId}</Typography>
             <Typography variant='subtitle2'>{research.description}</Typography> <br/>
             <Typography variant='inherit'>Effekt: {research.bonusText}</Typography>
             <Button sx={{width: '80%', mb: 2}} disabled={game.balance <= research.price}

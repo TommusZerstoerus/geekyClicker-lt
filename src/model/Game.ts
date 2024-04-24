@@ -4,5 +4,5 @@ export type Game = {
     unlockedStocks: boolean
     unlockedRoulette: boolean
     unlockedResearch: boolean
-    researches: Record<number, number>
+    researches: Record<number, boolean>
 }

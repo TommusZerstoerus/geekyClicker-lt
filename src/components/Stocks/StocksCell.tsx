@@ -30,7 +30,12 @@ const StocksCell = ({stock}: StockCellProps) => {
     useEffect(() => {
         const interval = setInterval(() => {
             const randomNumber = Math.random() < 0.5 ? -1 : 1;
-            const randomChange = Math.floor(Math.random() * (stock.price / 10)) * randomNumber;
+            let randomChange = 0
+            if(game.researches[7]) {
+                randomChange = Math.floor(Math.random() * (stock.price / 2)) * randomNumber
+            } else {
+                randomChange = Math.floor(Math.random() * (stock.price / 10)) * randomNumber
+            }
             if (currentValue + randomChange >= 0) {
                 setCurrentValue(stock.price);
             }
@@ -38,7 +43,7 @@ const StocksCell = ({stock}: StockCellProps) => {
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [game.unlockedStocks]);
+    }, [game.unlockedStocks, game.researches]);
 
     return (
         <TableRow key={stock.id}>

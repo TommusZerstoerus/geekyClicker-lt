@@ -24,36 +24,36 @@ export const researchList = [
         name: 'Die beste Musik hören',
         price: BasePriceList[6] * 1000,
         description: '80er, 90er und das Beste von heute!',
-        bonusText: 'Musik hören Bonus x 3',
+        bonusText: 'Musik hören Bonus x 5',
         upgradeId: 6,
-        bonus: 3
+        bonus: 5
     },
     {
         id: 3,
         name: 'Werde Meister des Git Repos',
         price: BasePriceList[4] * 10000,
         description: 'Du regierst nun über das Repository und alle fürchten sich vor dir!',
-        bonusText: 'Force Push auf Main Bonus x 3',
+        bonusText: 'Force Push auf Main Bonus x 5',
         upgradeId: 4,
-        bonus: 3
+        bonus: 5
     },
     {
         id: 4,
         name: 'Augen im Hinterkopf wachsen lassen',
         price: BasePriceList[5] * 500000,
         description: 'Mit dem 360° Monitor übersiehst du keinen einzigen Bug!',
-        bonusText: 'Weiteren Monitor aufstellen x 5',
+        bonusText: 'Weiteren Monitor aufstellen x 10',
         upgradeId: 5,
-        bonus: 5
+        bonus: 10
     },
     {
         id: 5,
         name: 'Meditation für Entwickler',
         price: BasePriceList[8] * 8000,
         description: 'Kaufe für jedes Büro eine Kaffeemaschine!',
-        bonusText: 'Kaffeevollautomat kaufen x 2',
+        bonusText: 'Kaffeevollautomat kaufen x 5',
         upgradeId: 8,
-        bonus: 2
+        bonus: 5
     },
     {
         id: 6,
@@ -66,10 +66,10 @@ export const researchList = [
     },
     {
         id: 7,
-        name: 'Roboterassistenten einstellen',
+        name: 'Künstliche Intelligenz nutzen',
         price: 5000000000,
         description: 'Niemals mehr einsam beim Codieren!',
-        bonusText: 'Klick Bonus x 3',
+        bonusText: 'Aktien Schwankungen x 5',
         upgradeId: 1337,
         bonus: 3
     },

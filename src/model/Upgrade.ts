@@ -4,3 +4,8 @@ export type Upgrade = {
     upgradeID: number
     level: number
 }
+
+export enum UpgradeType {
+    CLICK = "CLICK",
+    INCOME = "INCOME"
+}

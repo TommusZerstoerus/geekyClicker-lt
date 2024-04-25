@@ -1,9 +1,9 @@
 export const UpgradeBonusList: Record<number, number> = {
-    0: 10000000000, // Kotlin lernen
+    0: 1, // Kotlin lernen
     1: 10, // Cache leeren
-    2: 20, // Merge Konflikte lösen
-    3: 50, // Boris nach Hilfe fragen
-    4: 100, // Force Push auf Main
+    2: 100, // Merge Konflikte lösen
+    3: 500, // Boris nach Hilfe fragen
+    4: 1000, // Force Push auf Main
     5: 10, // Einen weiteren Monitor aufstellen
     6: 150, // Musik hören
     7: 500, // Git Pipeline schreiben

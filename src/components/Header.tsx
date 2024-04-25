@@ -12,7 +12,7 @@ import {Info, Home} from "@mui/icons-material";
 const Header = () => {
     const {game, setGame} = useGame()
 
-    function handleLogout() {
+    function handleRestart() {
         setGame({
             balance: 10,
             upgrades: {
@@ -41,7 +41,8 @@ const Header = () => {
             unlockedStocks: false,
             unlockedRoulette: false,
             unlockedResearch: false
-        });
+        })
+        localStorage.removeItem('game')
     }
 
     const showInfo = () => {
@@ -71,7 +72,7 @@ const Header = () => {
             cancelButtonText: 'Nein'
         }).then((result) => {
             if (result.isConfirmed) {
-                handleLogout()
+                handleRestart()
             }
         })
     }

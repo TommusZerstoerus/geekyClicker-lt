@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import {Container, Typography} from "@mui/material";
-import UpgradeBox, {UpgradeType} from "./UpgradeBox.tsx";
+import UpgradeBox from "./UpgradeBox.tsx";
+import {UpgradeType} from "../model/Upgrade.ts";
 
 const IncomeUpgradeList = () => {
     return (

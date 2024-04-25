@@ -57,9 +57,6 @@ const Home = () => {
         if (game.researches) {
             const boughtUpgrade = researchList.find(research => research.upgradeId === id && game.researches[research.id]);
             if (boughtUpgrade) {
-                console.log(boughtUpgrade);
-                console.log(id, "Upgrade", Math.floor((game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones) * boughtUpgrade.bonus), "No Upgrade", Math.floor(game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones));
-                console.log("UpgradeId", id, "bonus", boughtUpgrade.bonus, "Research Upgrade id", boughtUpgrade.upgradeId);
                 return Math.floor((game.upgrades[id] * UpgradeBonusList[id] + UpgradeMileStoneList[id] * mileStones) * boughtUpgrade.bonus);
             }
         }
@@ -126,19 +123,29 @@ const Home = () => {
     }, [game, incomeBonus, setGame]);
 
     useEffect(() => {
-        const clickBonus =
+        let clickBonus =
             calcBonus(0) +
             calcBonus(1) +
             calcBonus(2) +
             calcBonus(3) +
             calcBonus(4)
+        if(game.researches) {
+            if(game.researches[8]) {
+                clickBonus = clickBonus * 5;
+            }
+        }
         setClickBonus(clickBonus);
-        const incomeBonus =
+        let incomeBonus =
             calcBonus(5) +
             calcBonus(6) +
             calcBonus(7) +
             calcBonus(8) +
             calcBonus(9)
+        if(game.researches) {
+            if(game.researches[8]) {
+                incomeBonus = incomeBonus * 5;
+            }
+        }
         setIncomeBonus(Math.floor(incomeBonus))
     }, [game.upgrades, game.researches]);
 

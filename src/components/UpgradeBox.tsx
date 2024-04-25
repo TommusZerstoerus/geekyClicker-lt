@@ -6,6 +6,8 @@ import {ShoppingCart} from "@mui/icons-material";
 import {IOSSwitch} from "./IOSSwitch.tsx";
 import {formatNumber} from "./BalanceComponent.tsx";
 import {BasePriceList, UpgradeBonusList} from "../model/UpgradeList.ts";
+import {researchList} from "../model/ResearchList.ts";
+import {UpgradeType} from "../model/Upgrade.ts";
 
 type ClickUpgradeProps = {
     id: number,
@@ -13,20 +15,19 @@ type ClickUpgradeProps = {
     type: UpgradeType
 }
 
-export enum UpgradeType {
-    CLICK = "CLICK",
-    INCOME = "INCOME"
-}
-
 const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
     const basePrice = BasePriceList[id]
     const [upgradePrice, setUpgradePrice] = useState(basePrice);
     const [tenTimes, setTenTimes] = useState(false);
+    const [researchUpgrade, setResearchUpgrade] = useState(false);
+    const [upgradeBonus, setUpgradeBonus] = useState(UpgradeBonusList[id]);
     const {game, setGame} = useGame()
+
     const balance = game.balance
     const level = game.upgrades[id]
-    const [oldValue, setOldValue] = useState(Math.floor(level / 100))
     const upgradePriceText = formatNumber(upgradePrice);
+
+    const [oldValue, setOldValue] = useState(Math.floor(level / 100))
     const [animateBar, setAnimateBar] = useState(false)
 
     function calcUpgradePrice() {
@@ -71,6 +72,21 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
         setOldValue(newValue)
     }
 
+    useEffect(() => {
+        if (game.researches) {
+            const boughtUpgrade = researchList.find(research => research.upgradeId === id && game.researches[research.id]);
+            if (boughtUpgrade) {
+                setResearchUpgrade(true)
+                setUpgradeBonus(UpgradeBonusList[id] * boughtUpgrade.bonus)
+            } else {
+                setResearchUpgrade(false)
+                setUpgradeBonus(UpgradeBonusList[id])
+            }
+        }
+    }, [game.researches]);
+
+    const adjustedUpgradeBonus = tenTimes ? formatNumber(upgradeBonus * 10) : formatNumber(upgradeBonus);
+
     return (
         <Container maxWidth="lg" style={{textAlign: "center"}}>
             <Box
@@ -88,8 +104,8 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
                 <Typography variant="body1">
                     {name}
                 </Typography>
-                <Typography variant="body2">
-                    {type === UpgradeType.CLICK ? `(+${formatNumber(UpgradeBonusList[id])}€)` : `(+${formatNumber(UpgradeBonusList[id])}€/s)`}
+                <Typography variant="body2" color={researchUpgrade ? "green" : "black"}>
+                    {type === UpgradeType.CLICK ? `(+${adjustedUpgradeBonus}€)` : `(+${adjustedUpgradeBonus}€/s)`}
                 </Typography>
                 <Typography variant="body2">
                     Stufe {level}

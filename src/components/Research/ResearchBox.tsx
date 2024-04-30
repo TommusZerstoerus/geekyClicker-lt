@@ -5,7 +5,8 @@ import Button from "@mui/material/Button";
 import {ShoppingCart} from "@mui/icons-material";
 import {formatNumber} from "../BalanceComponent.tsx";
 import {useGame} from "../../context/GameContext.ts";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {ResearchContext, ResearchContextType} from "../../context/ResearchContext.tsx";
 
 type ResearchProps = {
     research: Research
@@ -14,12 +15,14 @@ type ResearchProps = {
 
 const ResearchBox = ({research}: ResearchProps) => {
     const {game, setGame} = useGame()
-    const [bought, setBought] = useState(false)
+    const {isResearching, setIsResearching} = React.useContext(ResearchContext) as ResearchContextType
+    const [boughtId, setBought] = useState<number | null>(null)
     const time = 10000
-    const [progress, setProgress]= useState(0)
+    const [progress, setProgress] = useState(0)
 
     const unlockResearch = () => {
-        setBought(true)
+        setBought(research.id)
+        setIsResearching(true)
         setProgress(0)
         setTimeout(() => {
             setGame({
@@ -27,6 +30,7 @@ const ResearchBox = ({research}: ResearchProps) => {
                 balance: game.balance - research.price,
                 researches: {...game.researches, [research.id]: true}
             })
+            setIsResearching(false)
         }, time)
     }
 
@@ -51,18 +55,20 @@ const ResearchBox = ({research}: ResearchProps) => {
             alignItems: 'center',
             justifyContent: 'center',
         }}>
+            <Typography>{isResearching}</Typography>
             <Typography variant='subtitle1'>{research.name}</Typography>
             <Typography variant='subtitle2'>{research.description}</Typography> <br/>
             <Typography variant='inherit'>Effekt: {research.bonusText}</Typography>
-            <Button sx={{width: '80%', mb: 2}} disabled={game.balance <= research.price || bought}
-                    startIcon={!bought && <ShoppingCart/>}
+            <Button sx={{width: '80%', mb: 2}} disabled={game.balance <= research.price || isResearching}
+                    startIcon={!isResearching && <ShoppingCart/>}
                     variant="contained" color="secondary" onClick={unlockResearch}>
-                {!bought && `Schalte Forschung frei (${formatNumber(research.price)}€)`}
-                {bought && `Es wird fleißig geforscht...`}
-                </Button>
-            {bought &&
-                <Box sx={{ width: '90%', mb: 2 }}>
-                    <LinearProgress variant="determinate" value={progress} />
+                {!isResearching && `Schalte Forschung frei (${formatNumber(research.price)}€)`}
+                {isResearching && boughtId == research.id && `Es wird fleißig geforscht...`}
+                {isResearching && boughtId !== research.id && `Eine Forschung läuft bereits...`}
+            </Button>
+            {isResearching && boughtId == research.id &&
+                <Box sx={{width: '90%', mb: 2}}>
+                    <LinearProgress variant="determinate" value={progress}/>
                     <Typography>{progress}%</Typography>
                 </Box>
             }

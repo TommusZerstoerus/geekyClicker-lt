@@ -5,7 +5,7 @@ import {useGame} from "../context/GameContext.ts";
 import {ShoppingCart} from "@mui/icons-material";
 import {IOSSwitch} from "./IOSSwitch.tsx";
 import {formatNumber} from "./BalanceComponent.tsx";
-import {BasePriceList, UpgradeBonusList} from "../model/UpgradeList.ts";
+import {BasePriceList, UpgradeBonusList, UpgradeMileStoneList} from "../model/UpgradeList.ts";
 import {researchList} from "../model/ResearchList.ts";
 import {UpgradeType} from "../model/Upgrade.ts";
 
@@ -137,7 +137,7 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
                         variant="determinate"
                         value={level % 100}
                     />
-                    <Typography>{level % 100} / 100</Typography>
+                    <Typography variant="body2">{level % 100} / 100  {type === UpgradeType.CLICK ? `(+${formatNumber(UpgradeMileStoneList[id])}€)` : `(+${formatNumber(UpgradeMileStoneList[id])}€/s)`}</Typography>
                 </Box>
             </Box>
         </Container>

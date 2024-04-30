@@ -24,10 +24,10 @@ const ResearchBox = ({research}: ResearchProps) => {
         setBought(research.id)
         setIsResearching(true)
         setProgress(0)
+        setGame({...game, balance: game.balance - research.price})
         setTimeout(() => {
             setGame({
                 ...game,
-                balance: game.balance - research.price,
                 researches: {...game.researches, [research.id]: true}
             })
             setIsResearching(false)
@@ -55,7 +55,6 @@ const ResearchBox = ({research}: ResearchProps) => {
             alignItems: 'center',
             justifyContent: 'center',
         }}>
-            <Typography>{isResearching}</Typography>
             <Typography variant='subtitle1'>{research.name}</Typography>
             <Typography variant='subtitle2'>{research.description}</Typography> <br/>
             <Typography variant='inherit'>Effekt: {research.bonusText}</Typography>
@@ -63,7 +62,7 @@ const ResearchBox = ({research}: ResearchProps) => {
                     startIcon={!isResearching && <ShoppingCart/>}
                     variant="contained" color="secondary" onClick={unlockResearch}>
                 {!isResearching && `Schalte Forschung frei (${formatNumber(research.price)}€)`}
-                {isResearching && boughtId == research.id && `Es wird fleißig geforscht...`}
+                {isResearching && boughtId == research.id && research.researchText}
                 {isResearching && boughtId !== research.id && `Eine Forschung läuft bereits...`}
             </Button>
             {isResearching && boughtId == research.id &&

@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 import {Research} from "../../model/Research.ts";
 import Button from "@mui/material/Button";
 import {Collapse} from "@mui/material";
-import Typography from "@mui/material/Typography";
 
 const ResearchList = () => {
     const {game} = useGame()
@@ -46,8 +45,6 @@ const ResearchList = () => {
                 </Collapse>
             </Box>
         )
-    } else {
-        return <Typography>Fehler</Typography>
     }
 }
 

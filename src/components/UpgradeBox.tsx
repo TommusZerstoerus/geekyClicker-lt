@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import {useGame} from "../context/GameContext.ts";
 import {ShoppingCart} from "@mui/icons-material";
 import {IOSSwitch} from "./IOSSwitch.tsx";
-import {formatNumber} from "./BalanceComponent.tsx";
 import {BasePriceList, UpgradeBonusList, UpgradeMileStoneList} from "../model/UpgradeList.ts";
 import {researchList} from "../model/ResearchList.ts";
 import {UpgradeType} from "../model/Upgrade.ts";
+import {formatNumber} from "./Home/BalanceComponent.tsx";
 
 type ClickUpgradeProps = {
     id: number,

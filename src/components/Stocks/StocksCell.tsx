@@ -1,6 +1,6 @@
 import {Grid, TableCell, TableRow} from "@mui/material";
 import {Stock} from "./StocksTable.tsx";
-import {formatNumber} from "../BalanceComponent.tsx";
+import {formatNumber} from "../Home/BalanceComponent.tsx";
 import Button from "@mui/material/Button";
 import {useEffect, useState} from "react";
 import {useGame} from "../../context/GameContext.ts";

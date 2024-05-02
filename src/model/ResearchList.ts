@@ -69,7 +69,7 @@ export const researchList = [
         bonusText: 'Pyhton verbieten Bonus x 5',
         upgradeId: 9,
         bonus: 5,
-        researchText: "rm -r /python"
+        researchText: "rm -rf /python"
     },
     {
         id: 7,

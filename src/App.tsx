@@ -15,7 +15,8 @@ function App() {
         unlockedStocks: false,
         unlockedRoulette: false,
         unlockedResearch: false,
-        researches: {}
+        researches: {},
+        geekyCoins: 0
     });
 
     return (

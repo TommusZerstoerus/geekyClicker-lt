@@ -5,4 +5,5 @@ export type Game = {
     unlockedRoulette: boolean
     unlockedResearch: boolean
     researches: Record<number, boolean>
+    geekyCoins: number
 }

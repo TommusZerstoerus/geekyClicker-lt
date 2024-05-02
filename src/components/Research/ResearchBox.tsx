@@ -3,7 +3,7 @@ import {LinearProgress, Typography} from "@mui/material";
 import {Research} from "../../model/Research.ts";
 import Button from "@mui/material/Button";
 import {ShoppingCart} from "@mui/icons-material";
-import {formatNumber} from "../BalanceComponent.tsx";
+import {formatNumber} from "../Home/BalanceComponent.tsx";
 import {useGame} from "../../context/GameContext.ts";
 import React, {useEffect, useState} from "react";
 import {ResearchContext, ResearchContextType} from "../../context/ResearchContext.tsx";
@@ -24,12 +24,9 @@ const ResearchBox = ({research}: ResearchProps) => {
         setBought(research.id)
         setIsResearching(true)
         setProgress(0)
-        setGame({...game, balance: game.balance - research.price})
+        setGame((prev) => ({...prev, balance: prev.balance - research.price}))
         setTimeout(() => {
-            setGame({
-                ...game,
-                researches: {...game.researches, [research.id]: true}
-            })
+            setGame((prev) => ({...prev, researches: {...prev.researches, [research.id]: true}}))
             setIsResearching(false)
         }, time)
     }

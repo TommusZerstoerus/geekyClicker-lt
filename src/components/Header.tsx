@@ -8,11 +8,12 @@ import Swal from "sweetalert2";
 import {useGame} from "../context/GameContext.ts";
 import {IconButton} from "@mui/material";
 import {Info, Home} from "@mui/icons-material";
+import {formatNumber} from "./Home/BalanceComponent.tsx";
 
 const Header = () => {
     const {game, setGame} = useGame()
 
-    function handleRestart() {
+    function handleRestart(coins: number) {
         setGame({
             balance: 10,
             upgrades: {
@@ -40,16 +41,18 @@ const Header = () => {
             },
             unlockedStocks: false,
             unlockedRoulette: false,
-            unlockedResearch: false
+            unlockedResearch: false,
+            geekyCoins: coins
         })
         localStorage.removeItem('game')
     }
 
     const showInfo = () => {
         withReactContent(Swal).fire({
-            title: <i>GeekyClicker</i>,
-            text: 'Kaufe Klick Upgrades um dein Einkommen pro Klick zu erhöhen. Die passiven Einkommen Upgrades erhöhen dein Einkommen pro Sekunde, falls du mal nicht klicken möchtest. Kaufe Aktien um mit deinem Geld ein bisschen zu spielen.',
+            html: `<b>Spielprinzip</b> </br> Kaufe Klick Upgrades um dein Einkommen pro Klick zu erhöhen. Die passiven Einkommen Upgrades erhöhen dein Einkommen pro Sekunde, falls du mal nicht klicken möchtest. </br> </br> <b>Features</b> </br> Kaufe Aktien oder spiele Roulette um mit deinem Geld ein bisschen zu spielen. Forsche fleißig, damit deine Upgrades noch stärker werden! </br> </br> <b>Geeky Coins</b> </br> Setze deinen Spielstand zurück um GeekyCoins zu erhalten. Diese gewähren dir einen großen Bonus auf dein Einkommen!`,
             icon: 'info',
+            confirmButtonText: 'Verstanden',
+            confirmButtonColor: '#df742f',
             showConfirmButton: true,
         })
     }
@@ -72,7 +75,23 @@ const Header = () => {
             cancelButtonText: 'Nein'
         }).then((result) => {
             if (result.isConfirmed) {
-                handleRestart()
+                handleRestart(0)
+            }
+        })
+    }
+
+    function handleGeekyCoins() {
+        const availableCoins = Math.floor(game.balance / 1000000000)
+        withReactContent(Swal).fire({
+            title: <i>Neustart</i>,
+            html: `Möchtest du deinen Stand zurück setzten und dein Geld in GeekyCoins umwandeln? </br> </br> Du würdest ${formatNumber(availableCoins)} Geekycoins erhalten`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ja',
+            cancelButtonText: 'Nein'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleRestart(game.geekyCoins + availableCoins)
             }
         })
     }
@@ -96,8 +115,9 @@ const Header = () => {
                         Geeky Clicker
                     </Typography>
                     <IconButton sx={{mr: '20px'}} onClick={showInfo}><Info/></IconButton>
+                    <Button sx={{mr: '20px'}} color="inherit" onClick={handleGeekyCoins}>GeekyCoins erhalten</Button>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleSave}>Speichern</Button>
-                    <Button color="inherit" onClick={showRestart}>Restart</Button>
+                    <Button color="inherit" onClick={showRestart}>Neustarten</Button>
                 </Toolbar>
             </AppBar>
         </Box>

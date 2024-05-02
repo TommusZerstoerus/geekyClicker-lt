@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import icon from "../assets/icon.svg";
 import {useEffect, useState} from "react";
 import {useGame} from "../context/GameContext.ts";
-import BalanceComponent, {formatNumber} from "../components/BalanceComponent.tsx";
+import BalanceComponent, {formatNumber} from "../components/Home/BalanceComponent.tsx";
 import {UpgradeBonusList, UpgradeMileStoneList} from "../model/UpgradeList.ts";
 import {animated, useSpring} from '@react-spring/web'
 import StocksTable from "../components/Stocks/StocksTable.tsx";
@@ -17,6 +17,7 @@ import ActiveIncome from "../components/Home/ActiveIncome.tsx";
 import RouletteTable from "../components/Roulette/Roulette.tsx";
 import ResearchList from "../components/Research/ResearchList.tsx";
 import {researchList} from "../model/ResearchList.ts";
+import GeekyCoinsComponent from "../components/Home/GeekyCoinsComponent.tsx";
 
 const Home = () => {
     const [clickBonus, setClickBonus] = useState(0);
@@ -96,7 +97,8 @@ const Home = () => {
                 unlockedStocks: loadedData.unlockedStocks,
                 unlockedRoulette: loadedData.unlockedRoulette,
                 unlockedResearch: loadedData.unlockedResearch,
-                researches: loadedData.researches
+                researches: loadedData.researches,
+                geekyCoins: loadedData.geekyCoins
             })
         } else {
             setGame({
@@ -105,7 +107,8 @@ const Home = () => {
                 unlockedStocks: false,
                 unlockedRoulette: false,
                 unlockedResearch: false,
-                researches: {}
+                researches: {},
+                geekyCoins: 0
             });
         }
     }, []);
@@ -129,9 +132,13 @@ const Home = () => {
             calcBonus(2) +
             calcBonus(3) +
             calcBonus(4)
-        if(game.researches) {
-            if(game.researches[8]) {
-                clickBonus = clickBonus * 5;
+        if (game.geekyCoins > 0) {
+            if (game.researches) {
+                if (game.researches[8]) {
+                    clickBonus = clickBonus * 5 * (1 + game.geekyCoins);
+                } else {
+                    clickBonus = clickBonus * (1 + game.geekyCoins);
+                }
             }
         }
         setClickBonus(clickBonus);
@@ -141,9 +148,13 @@ const Home = () => {
             calcBonus(7) +
             calcBonus(8) +
             calcBonus(9)
-        if(game.researches) {
-            if(game.researches[8]) {
-                incomeBonus = incomeBonus * 5;
+        if (game.geekyCoins > 0) {
+            if (game.researches) {
+                if (game.researches[8]) {
+                    incomeBonus = incomeBonus * 5 * (1 + game.geekyCoins);
+                } else {
+                    incomeBonus = incomeBonus * (1 + game.geekyCoins);
+                }
             }
         }
         setIncomeBonus(Math.floor(incomeBonus))
@@ -166,6 +177,7 @@ const Home = () => {
                     <Container sx={{maxWidth: "100%", textAlign: 'center', width: "100%"}}>
                         <Box p={2}>
                             <BalanceComponent balance={game.balance}/>
+                            {game.geekyCoins > 0 && <GeekyCoinsComponent geekyCoins={game.geekyCoins}/>}
                             <ActiveIncome activeIncome={clickBonus}/>
                             <PassiveIncome incomeBonus={incomeBonus}/>
                             <Box sx={{display: 'flex', justifyContent: 'center'}}>

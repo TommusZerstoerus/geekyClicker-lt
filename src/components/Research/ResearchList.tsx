@@ -13,7 +13,9 @@ const ResearchList = () => {
     const [open, setOpen] = useState(true);
 
     useEffect(() => {
-        setFilteredResearchList(researchList.filter(research => !game.researches[research.id]).slice(0, 3));
+        if(game.researches) {
+            setFilteredResearchList(researchList.filter(research => !game.researches[research.id]).slice(0, 3));
+        }
     }, [game.researches]);
     if (filteredResearchList.length > 0) {
         return (

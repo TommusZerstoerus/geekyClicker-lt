@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {Collapse, Grid, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useGame} from "../../context/GameContext.ts";
-import {formatNumber} from "../BalanceComponent.tsx";
+import {formatNumber} from "../Home/BalanceComponent.tsx";
 
 enum Color {
     none,
@@ -71,7 +71,6 @@ const RouletteTable = () => {
         const newBalance = game.balance - bet
         if (color == Color.red || color == Color.black) {
             const win = bet * 2
-            console.log("bet", bet, "currentBet", currentBet, "win", win, "Balance", game.balance)
             setGame({...game, balance: newBalance + win})
         } else {
             const win = bet * 14

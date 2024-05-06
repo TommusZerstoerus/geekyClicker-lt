@@ -1,43 +1,34 @@
 import Box from "@mui/material/Box";
-import {Container, Typography} from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import UpgradeBox from "./UpgradeBox.tsx";
 import {UpgradeType} from "../model/Upgrade.ts";
+import {UpgradeNameList} from "../model/UpgradeList.ts";
 
 const IncomeUpgradeList = () => {
     return (
-        <Container maxWidth="xs" sx={{
+        <Container sx={{
+            mt: 2,
             textAlign: "center",
             flex: "1",
             display: "flex",
             justifyContent: "center",
             marginBottom: '20px',
-            order: 3
         }}>
-            <Container maxWidth="xs" style={{overflowY: 'auto', textAlign: 'center'}}>
-                <Box p={2}>
-                    <div style={{marginBottom: '20px'}}>
-                        <Typography variant="h4">Einkommen</Typography>
-                    </div>
-                    <div style={{marginBottom: '20px'}}>
-                        <UpgradeBox id={5} name={"Weiteren Monitor aufstellen"} type={UpgradeType.INCOME}/>
-                    </div>
-                    <div style={{marginBottom: '20px'}}>
-                        <UpgradeBox id={6} name={"Musik hören"} type={UpgradeType.INCOME}/>
-                    </div>
-                    <div style={{marginBottom: '20px'}}>
-                        <UpgradeBox id={7} name={"Git Pipeline schreiben"} type={UpgradeType.INCOME}/>
-                    </div>
-                    <div style={{marginBottom: '20px'}}>
-                        <UpgradeBox id={8} name={"Kaffeevollautomat kaufen"} type={UpgradeType.INCOME}/>
-                    </div>
-                    <div style={{marginBottom: '20px'}}>
-                        <UpgradeBox id={9} name={"Python verbieten"} type={UpgradeType.INCOME}/>
-                    </div>
+            <Container style={{ overflowY: 'auto', textAlign: 'center'}}>
+                <Box>
+                    <Grid container>
+                        {Array.from({ length: 5 }, (_, i) => (
+                            <Grid item xs={6} key={i}>
+                                <div style={{ marginBottom: '20px' }}>
+                                    <UpgradeBox id={i + 5} name={UpgradeNameList[i + 5]} type={UpgradeType.INCOME} />
+                                </div>
+                            </Grid>
+                        ))}
+                    </Grid>
                 </Box>
             </Container>
         </Container>
-
-    )
+    );
 }
 
 export default IncomeUpgradeList;

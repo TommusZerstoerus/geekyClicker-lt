@@ -153,6 +153,7 @@ const Header = () => {
                         >
                             <IconButton onClick={toggleMenu}><MenuIcon/></IconButton>
                             <Divider/>
+
                             <Button color="inherit" onClick={redirect} startIcon={<HomeIcon/>}>Zu Progeek</Button>
                             <Button color="inherit" onClick={showInfo} startIcon={<InfoIcon/>}>Informationen</Button>
                             <Button color="inherit" onClick={handleGeekyCoins}

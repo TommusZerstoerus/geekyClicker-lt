@@ -1,9 +1,11 @@
 import Box from "@mui/material/Box";
-import {Collapse, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import StocksCell from "./StocksCell.tsx";
 import {stocks} from "../../model/StockList.ts";
-import {useState} from "react";
 import Button from "@mui/material/Button";
+import {ShoppingCart} from "@mui/icons-material";
+import {formatNumber} from "../Home/BalanceComponent.tsx";
+import {useGame} from "../../context/GameContext.ts";
 
 export type Stock = {
     id: number,
@@ -12,20 +14,35 @@ export type Stock = {
 }
 
 const StocksTable = () => {
-    const [open, setOpen] = useState(true);
-    return (
-        <Box sx={{
-            width: '95%',
-            mt: 3,
-            p: 2,
-            bgcolor: "lightgray",
-            borderRadius: {lg: 5, xs: 3},
-        }}>
-            <Button onClick={() => setOpen(!open)} variant="contained" color="primary" sx={{mb: 2}}>
-                {open ? 'Aktien Zuklappen' : 'Aktien'}
-            </Button>
-            <Collapse in={open}  sx={{
-                width: '100%',
+    const {game, setGame} = useGame()
+
+    const unlockStocks = () => {
+        setGame({...game, unlockedStocks: true, balance: game.balance - 100000})
+    }
+
+    if (!game.unlockedStocks) {
+        return (
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                m: 2
+            }}>
+                <Button sx={{mt: 3, width: '60%'}} disabled={game.balance <= 100000} startIcon={<ShoppingCart/>}
+                        variant="contained" color="secondary" onClick={unlockStocks}>
+                    Schalte Aktien frei ({formatNumber(100000)}€)
+                </Button>
+            </Box>
+        );
+    } else {
+        return (
+            <Box sx={{
+                width: '95%',
+                mt: 3,
+                p: 2,
+                bgcolor: "lightgray",
+                borderRadius: {lg: 5, xs: 3},
             }}>
                 <Table>
                     <TableHead>
@@ -41,9 +58,9 @@ const StocksTable = () => {
                         ))}
                     </TableBody>
                 </Table>
-            </Collapse>
-        </Box>
-    )
+            </Box>
+        )
+    }
 }
 
 export default StocksTable

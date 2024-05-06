@@ -24,6 +24,19 @@ export const UpgradeMileStoneList: Record<number, number> = {
     9: UpgradeBonusList[9] * 1000 // Python verbieten
 }
 
+export const UpgradeNameList: Record<number, string> = {
+    0: "Kotlin lernen",
+    1: "Cache leeren",
+    2: "Merge Konflikte lösen",
+    3: "Boris nach Hilfe fragen",
+    4: "Force Push auf Main",
+    5: "Einen weiteren Monitor aufstellen",
+    6: "Musik hören",
+    7: "Git Pipeline schreiben",
+    8: "Kaffeevollautomat kaufen",
+    9: "Python verbieten"
+}
+
 export const BasePriceList: Record<number, number> = {
     0: 10, // Kotlin lernen
     1: 100, // Cache leeren

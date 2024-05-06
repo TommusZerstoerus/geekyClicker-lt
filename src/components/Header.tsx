@@ -6,12 +6,24 @@ import Button from '@mui/material/Button';
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import {useGame} from "../context/GameContext.ts";
-import {IconButton} from "@mui/material";
-import {Info, Home} from "@mui/icons-material";
+import {Divider, IconButton, SwipeableDrawer, useMediaQuery} from "@mui/material";
 import {formatNumber} from "./Home/BalanceComponent.tsx";
+import {useState} from "react";
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import SaveIcon from '@mui/icons-material/Save';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import MenuIcon from '@mui/icons-material/Menu';
+import PaidIcon from '@mui/icons-material/Paid';
 
 const Header = () => {
     const {game, setGame} = useGame()
+    const [menuOpen, setMenuOpen] = useState(false);
+    const isXsScreen = useMediaQuery('(max-width:600px)');
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
 
     function handleRestart(coins: number) {
         setGame({
@@ -108,18 +120,49 @@ const Header = () => {
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
+            {!isXsScreen && <AppBar position="static">
                 <Toolbar sx={{backgroundColor: '#909090'}}>
-                    <IconButton onClick={redirect}><Home/></IconButton>
+                    <IconButton onClick={redirect}><HomeIcon/></IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1, ml: 2}}>
                         Geeky Clicker
                     </Typography>
-                    <IconButton sx={{mr: '20px'}} onClick={showInfo}><Info/></IconButton>
+                    <IconButton sx={{mr: '20px'}} onClick={showInfo}><InfoIcon/></IconButton>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleGeekyCoins}>GeekyCoins erhalten</Button>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleSave}>Speichern</Button>
                     <Button color="inherit" onClick={showRestart}>Neustarten</Button>
                 </Toolbar>
-            </AppBar>
+            </AppBar>}
+            {isXsScreen &&
+                <>
+                    <AppBar position="static">
+                        <Toolbar sx={{backgroundColor: '#909090'}}>
+                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                                Geeky Clicker
+                            </Typography>
+                            <IconButton onClick={toggleMenu} sx={{mr: 2}}>
+                                <MenuIcon/>
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+                    <SwipeableDrawer anchor={"right"} open={menuOpen} onOpen={toggleMenu} onClose={toggleMenu}>
+                        <Box
+                            sx={{width: 170}}
+                            role="presentation"
+                            onClick={toggleMenu}
+                            onKeyDown={toggleMenu}
+                        >
+                            <IconButton onClick={toggleMenu}><MenuIcon/></IconButton>
+                            <Divider/>
+                            <Button color="inherit" onClick={redirect} startIcon={<HomeIcon/>}>Zu Progeek</Button>
+                            <Button color="inherit" onClick={showInfo} startIcon={<InfoIcon/>}>Informationen</Button>
+                            <Button color="inherit" onClick={handleGeekyCoins}
+                                    startIcon={<PaidIcon/>}>GeekyCoins</Button>
+                            <Button color="inherit" onClick={handleSave} startIcon={<SaveIcon/>}>Speichern</Button>
+                            <Button color="inherit" onClick={showRestart} startIcon={<RefreshIcon/>}>Neustarten</Button>
+                        </Box>
+                    </SwipeableDrawer>
+                </>
+            }
         </Box>
     );
 }

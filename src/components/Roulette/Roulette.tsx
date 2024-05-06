@@ -35,7 +35,7 @@ const RouletteTable = () => {
     const [selectedColor, setSelectedColor] = useState(Color.red);
     const [winColor, setWinColor] = useState(Color.none)
     const {game, setGame} = useGame()
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     const startSpin = () => {
         setGame({...game, balance: game.balance - currentBet})
@@ -84,6 +84,7 @@ const RouletteTable = () => {
         }
     }, [game.balance]);
 
+
     return (
         <Box sx={{
             width: '95%',
@@ -124,8 +125,8 @@ const RouletteTable = () => {
                             disabled={spinning}
                             variant="contained"
                             sx={{
-                                width: 100,
-                                height: 100,
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
                                 color: 'red',
                                 backgroundColor: 'red',
                                 "&:hover": {
@@ -141,8 +142,8 @@ const RouletteTable = () => {
                             disabled={spinning}
                             variant="contained"
                             sx={{
-                                width: 100,
-                                height: 100,
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
                                 color: 'black',
                                 backgroundColor: 'black',
                                 "&:hover": {
@@ -158,8 +159,8 @@ const RouletteTable = () => {
                             disabled={spinning}
                             variant="contained"
                             sx={{
-                                width: 100,
-                                height: 100,
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
                                 color: 'green',
                                 backgroundColor: 'green',
                                 "&:hover": {
@@ -180,8 +181,8 @@ const RouletteTable = () => {
                         <Box
                             className={winColor === Color.red ? "animated-red" : winColor === Color.black ? "animated-black" : "animated-green"}
                             sx={{
-                                width: 100,
-                                height: 100,
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
                                 "&:hover": {
                                     backgroundColor: "green"
                                 },
@@ -194,7 +195,7 @@ const RouletteTable = () => {
                 <Box>
                     <Button variant="contained" color="secondary" sx={{mt: 2, width: '50%'}} onClick={startSpin}
                             disabled={spinning}>
-                        Spin
+                        Drehen
                     </Button>
                 </Box>
             </Collapse>

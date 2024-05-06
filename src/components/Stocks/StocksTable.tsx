@@ -15,7 +15,7 @@ const StocksTable = () => {
     const [open, setOpen] = useState(true);
     return (
         <Box sx={{
-            width: {lg: '95%'},
+            width: '95%',
             mt: 3,
             p: 2,
             bgcolor: "lightgray",

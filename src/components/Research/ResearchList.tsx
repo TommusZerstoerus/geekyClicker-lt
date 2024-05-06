@@ -10,7 +10,7 @@ import {Collapse} from "@mui/material";
 const ResearchList = () => {
     const {game} = useGame()
     const [filteredResearchList, setFilteredResearchList] = useState<Research[]>([]);
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         if(game.researches) {

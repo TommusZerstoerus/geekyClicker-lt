@@ -94,26 +94,28 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
                 boxShadow={3}
                 p={2}
                 sx={{
-                    background: 'linear-gradient(0deg, hsla(24, 73%, 53%, 1) 10%, hsla(0, 0%, 100%, 1) 100%)',
+                    background: 'black',
                     display: 'flex',
+                    color: '#49da3a',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    border: '2px solid #49da3a',
                 }}
             >
                 <Typography variant="body1">
                     {name}
                 </Typography>
-                <Typography variant="body2" color={researchUpgrade ? "green" : "black"}>
+                <Typography variant="body2" color={researchUpgrade ? "gold" : ""}>
                     {type === UpgradeType.CLICK ? `(+${adjustedUpgradeBonus}€)` : `(+${adjustedUpgradeBonus}€/s)`}
                 </Typography>
                 <Typography variant="body2">
                     Stufe {level}
                 </Typography>
                 {balance >= upgradePrice ?
-                    <Button startIcon={<ShoppingCart/>} variant="contained" color="secondary"
+                    <Button startIcon={<ShoppingCart/>} variant="contained"
                             onClick={buyUpgrade}>{upgradePriceText}€</Button> :
-                    <Button startIcon={<ShoppingCart/>} variant="contained" color="secondary"
+                    <Button startIcon={<ShoppingCart/>} variant="contained"
                             disabled>{upgradePriceText}€</Button>}
                 <Stack marginTop={'10px'} direction="row" spacing={1} alignItems="center">
                     <Typography>1x</Typography>

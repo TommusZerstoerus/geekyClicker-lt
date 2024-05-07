@@ -43,14 +43,16 @@ const ResearchBox = ({research}: ResearchProps) => {
 
     return (
         <Box sx={{
-            background: "darkgray", borderRadius: {
+            background: "black", borderRadius: {
                 lg: 5, xs: 3
             },
+            color: "#77fa3c",
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            border: '2px solid #49da3a',
         }}>
             <Typography variant='subtitle1'>{research.name}</Typography>
             <Typography variant='subtitle2'>{research.description}</Typography> <br/>

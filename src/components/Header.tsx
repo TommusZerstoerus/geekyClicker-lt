@@ -64,7 +64,7 @@ const Header = () => {
             html: `<b>Spielprinzip</b> </br> Kaufe Klick Upgrades um dein Einkommen pro Klick zu erhöhen. Die passiven Einkommen Upgrades erhöhen dein Einkommen pro Sekunde, falls du mal nicht klicken möchtest. </br> </br> <b>Features</b> </br> Kaufe Aktien oder spiele Roulette um mit deinem Geld ein bisschen zu spielen. Forsche fleißig, damit deine Upgrades noch stärker werden! </br> </br> <b>Geeky Coins</b> </br> Setze deinen Spielstand zurück um GeekyCoins zu erhalten. Diese gewähren dir einen großen Bonus auf dein Einkommen!`,
             icon: 'info',
             confirmButtonText: 'Verstanden',
-            confirmButtonColor: '#df742f',
+            confirmButtonColor: '#489726',
             showConfirmButton: true,
         })
     }
@@ -73,6 +73,7 @@ const Header = () => {
         withReactContent(Swal).fire({
             title: <i>Erfolgreich gespeichert</i>,
             icon: 'success',
+            confirmButtonColor: '#489726',
             showConfirmButton: true,
         })
     }
@@ -84,7 +85,9 @@ const Header = () => {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ja',
-            cancelButtonText: 'Nein'
+            cancelButtonText: 'Nein',
+            confirmButtonColor: '#489726',
+            cancelButtonColor: '#000000'
         }).then((result) => {
             if (result.isConfirmed) {
                 handleRestart(0)
@@ -100,7 +103,9 @@ const Header = () => {
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Ja',
-            cancelButtonText: 'Nein'
+            cancelButtonText: 'Nein',
+            confirmButtonColor: '#489726',
+            cancelButtonColor: '#000000'
         }).then((result) => {
             if (result.isConfirmed) {
                 handleRestart(game.geekyCoins + availableCoins)
@@ -121,12 +126,12 @@ const Header = () => {
     return (
         <Box sx={{flexGrow: 1}}>
             {!isXsScreen && <AppBar position="static">
-                <Toolbar sx={{backgroundColor: '#909090'}}>
-                    <IconButton onClick={redirect}><HomeIcon/></IconButton>
+                <Toolbar sx={{ background: 'linear-gradient(to right, #000000, #0f9b0f), #909090' }}>
+                    <IconButton sx={{color: 'white'}} onClick={redirect}><HomeIcon/></IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1, ml: 2}}>
                         Geeky Clicker
                     </Typography>
-                    <IconButton sx={{mr: '20px'}} onClick={showInfo}><InfoIcon/></IconButton>
+                    <IconButton sx={{mr: '20px', color: "white"}} onClick={showInfo}><InfoIcon/></IconButton>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleGeekyCoins}>GeekyCoins erhalten</Button>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleSave}>Speichern</Button>
                     <Button color="inherit" onClick={showRestart}>Neustarten</Button>
@@ -135,11 +140,11 @@ const Header = () => {
             {isXsScreen &&
                 <>
                     <AppBar position="static">
-                        <Toolbar sx={{backgroundColor: '#909090'}}>
+                        <Toolbar sx={{ background: 'linear-gradient(to right, #000000, #0f9b0f), #909090' }}>
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                 Geeky Clicker
                             </Typography>
-                            <IconButton onClick={toggleMenu} sx={{mr: 2}}>
+                            <IconButton onClick={toggleMenu} sx={{mr: 2, color: 'white'}}>
                                 <MenuIcon/>
                             </IconButton>
                         </Toolbar>

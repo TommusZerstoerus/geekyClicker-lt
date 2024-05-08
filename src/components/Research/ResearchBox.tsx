@@ -59,7 +59,7 @@ const ResearchBox = ({research}: ResearchProps) => {
             <Typography variant='inherit'>Effekt: {research.bonusText}</Typography>
             <Button sx={{width: '80%', mb: 2}} disabled={game.balance <= research.price || isResearching}
                     startIcon={!isResearching && <ShoppingCart/>}
-                    variant="contained" color="secondary" onClick={unlockResearch}>
+                    variant="contained" onClick={unlockResearch}>
                 {!isResearching && `Schalte Forschung frei (${formatNumber(research.price)}€)`}
                 {isResearching && boughtId == research.id && research.researchText}
                 {isResearching && boughtId !== research.id && `Eine Forschung läuft bereits...`}

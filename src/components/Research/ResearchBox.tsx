@@ -66,7 +66,7 @@ const ResearchBox = ({research}: ResearchProps) => {
             </Button>
             {isResearching && boughtId == research.id &&
                 <Box sx={{width: '90%', mb: 2}}>
-                    <LinearProgress variant="determinate" value={progress}/>
+                    <LinearProgress variant="determinate" color="primary" value={progress}/>
                     <Typography>{progress}%</Typography>
                 </Box>
             }

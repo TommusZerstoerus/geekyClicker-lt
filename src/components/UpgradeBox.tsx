@@ -133,7 +133,7 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
                     }}
                 >
                     <LinearProgress
-                        color={"secondary"}
+                        color={"primary"}
                         className={animateBar ? "animate-bar" : ""}
                         onAnimationEnd={() => setAnimateBar(false)}
                         variant="determinate"

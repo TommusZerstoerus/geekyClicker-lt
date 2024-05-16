@@ -38,18 +38,17 @@ const StocksTable = () => {
     } else {
         return (
             <Box sx={{
-                width: '95%',
                 mt: 3,
                 p: 2,
-                bgcolor: "lightgray",
+                bgcolor: "gray",
                 borderRadius: {lg: 5, xs: 3},
             }}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Aktie</TableCell>
-                            <TableCell>Preis</TableCell>
-                            <TableCell>Kauf/Verkauf</TableCell>
+                            <TableCell sx={{color: 'white', fontWeight: 'bold'}}>Aktie</TableCell>
+                            <TableCell sx={{color: "white", fontWeight: 'bold'}}>Preis</TableCell>
+                            <TableCell sx={{color: "white", fontWeight: 'bold'}}>Kauf/Verkauf</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

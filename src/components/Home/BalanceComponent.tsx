@@ -14,8 +14,8 @@ function BalanceComponent({ balance }: BalanceComponentProps) {
     const formattedBalance = formatNumber(balance)
 
     return (
-        <Box sx={{marginBottom: '10px'}}>
-            <Typography variant="h4">
+        <Box sx={{marginBottom: '10px', marginTop: '10px', color: '#00ff00'}}>
+            <Typography fontWeight='bold' variant="h4">
                 Balance {formattedBalance}€
             </Typography>
         </Box>

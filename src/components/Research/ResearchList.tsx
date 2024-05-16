@@ -44,14 +44,12 @@ const ResearchList = () => {
     if (filteredResearchList.length > 0) {
         return (
             <Box sx={{
-                width: '95%',
                 mt: 3,
                 p: 2,
-                bgcolor: "lightgray",
+                bgcolor: "gray",
                 borderRadius: {lg: 5, xs: 3},
             }}>
                     <Box sx={{
-                        bgcolor: "lightgray",
                         borderRadius: {lg: 5, xs: 3},
                         display: 'flex',
                         flexDirection: 'column',

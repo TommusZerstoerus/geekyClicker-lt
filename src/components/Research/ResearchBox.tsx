@@ -43,28 +43,30 @@ const ResearchBox = ({research}: ResearchProps) => {
 
     return (
         <Box sx={{
-            background: "darkgray", borderRadius: {
+            background: "black", borderRadius: {
                 lg: 5, xs: 3
             },
+            color: "#77fa3c",
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            border: '2px solid #49da3a',
         }}>
             <Typography variant='subtitle1'>{research.name}</Typography>
             <Typography variant='subtitle2'>{research.description}</Typography> <br/>
             <Typography variant='inherit'>Effekt: {research.bonusText}</Typography>
             <Button sx={{width: '80%', mb: 2}} disabled={game.balance <= research.price || isResearching}
                     startIcon={!isResearching && <ShoppingCart/>}
-                    variant="contained" color="secondary" onClick={unlockResearch}>
+                    variant="contained" onClick={unlockResearch}>
                 {!isResearching && `Schalte Forschung frei (${formatNumber(research.price)}€)`}
                 {isResearching && boughtId == research.id && research.researchText}
                 {isResearching && boughtId !== research.id && `Eine Forschung läuft bereits...`}
             </Button>
             {isResearching && boughtId == research.id &&
                 <Box sx={{width: '90%', mb: 2}}>
-                    <LinearProgress variant="determinate" value={progress}/>
+                    <LinearProgress variant="determinate" color="primary" value={progress}/>
                     <Typography>{progress}%</Typography>
                 </Box>
             }

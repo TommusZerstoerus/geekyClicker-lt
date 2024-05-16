@@ -7,7 +7,7 @@ const PassiveIncome = ({incomeBonus}: {incomeBonus: number}) => {
     const {game} = useGame()
     return (
         <Box sx={{marginBottom: '20px'}}>
-            <Typography variant="h6" gutterBottom color={game.researches[8] ? "green" : "black"}>
+            <Typography fontWeight='bold'  variant="h6" gutterBottom color={game.researches[8] ? "gold" : "#00ff00"}>
                 Passives Einkommen {formatNumber(incomeBonus)}€/s
             </Typography>
         </Box>

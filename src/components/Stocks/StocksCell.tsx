@@ -31,7 +31,7 @@ const StocksCell = ({stock}: StockCellProps) => {
         const interval = setInterval(() => {
             const randomNumber = Math.random() < 0.5 ? -1 : 1;
             let randomChange = 0
-            if(game.researches[7]) {
+            if (game.researches[7]) {
                 randomChange = Math.floor(Math.random() * (stock.price / 2)) * randomNumber
             } else {
                 randomChange = Math.floor(Math.random() * (stock.price / 10)) * randomNumber
@@ -47,20 +47,20 @@ const StocksCell = ({stock}: StockCellProps) => {
 
     return (
         <TableRow key={stock.id}>
-            <TableCell sx={{width: '50px'}}>{stock.name}</TableCell>
+            <TableCell sx={{width: '50px', color: "white", fontWeight: 'bold'}}>{stock.name}</TableCell>
             <TableCell
                 sx={{
-                    width: '200px',color: bought ? (currentValue >= buyPrice ? "green" : "red") : "black"
+                    width: '200px', fontWeight: 'bold', color: bought ? (currentValue >= buyPrice ? "#5ebd53" : "darkred") : "white"
                 }}
             >{formatNumber(currentValue)}€ {bought && `(${difference}€)`}</TableCell>
             <TableCell sx={{width: '200px'}}>
                 <Grid container spacing={2}>
                     <Grid item>
-                        <Button onClick={buyStock} color="secondary" variant="contained"
+                        <Button onClick={buyStock} variant="contained"
                                 disabled={bought || stock.price > game.balance}>Kauf</Button>
                     </Grid>
                     <Grid item>
-                        <Button onClick={sellStock} color="secondary" variant="contained"
+                        <Button onClick={sellStock} variant="contained"
                                 disabled={!bought}>Verkauf</Button>
                     </Grid>
                 </Grid>

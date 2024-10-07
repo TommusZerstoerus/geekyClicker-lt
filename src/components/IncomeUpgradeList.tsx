@@ -18,7 +18,7 @@ const IncomeUpgradeList = () => {
                 <Box>
                     <Grid container>
                         {Array.from({ length: 5 }, (_, i) => (
-                            <Grid item xs={6} key={i}>
+                            <Grid item xs={12} lg={6}  key={i}>
                                 <div style={{ marginBottom: '20px' }}>
                                     <UpgradeBox id={i + 5} name={UpgradeNameList[i + 5]} type={UpgradeType.INCOME} />
                                 </div>

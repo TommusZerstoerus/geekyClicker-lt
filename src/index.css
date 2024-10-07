@@ -4,8 +4,8 @@
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(0, 0, 0, 0.87);
-    background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+    color: rgba(255, 255, 255, 0.87);
+    background: #414345;
 }
 
 body {
@@ -16,6 +16,11 @@ body {
     animation-name: bounce;
     animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
+}
+
+.MuiDrawer-paper {
+    color: #eaeaea;
+    background: linear-gradient(to top, #303030, #0f9b0f) !important;
 }
 
 @keyframes wobble {

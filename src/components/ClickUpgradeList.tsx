@@ -11,6 +11,7 @@ const ClickUpgradeList = () => {
             textAlign: "center",
             flex: "1",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             marginBottom: '20px',
         }}>
@@ -18,7 +19,7 @@ const ClickUpgradeList = () => {
                 <Box>
                     <Grid container>
                         {Array.from({ length: 5 }, (_, i) => (
-                            <Grid item xs={6} key={i}>
+                            <Grid item xs={12} lg={6} key={i}>
                                 <div style={{ marginBottom: '20px' }}>
                                     <UpgradeBox id={i} name={UpgradeNameList[i]} type={UpgradeType.CLICK} />
                                 </div>

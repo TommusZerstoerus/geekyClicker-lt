@@ -88,7 +88,7 @@ const RouletteTable = () => {
         setGame({...game, unlockedRoulette: true, balance: game.balance - 10000})
     }
 
-    if(!game.unlockedRoulette) {
+    if (!game.unlockedRoulette) {
         return (
             <Box sx={{
                 m: 2,
@@ -107,111 +107,121 @@ const RouletteTable = () => {
     } else {
         return (
             <Box sx={{
-                width: '95%',
+                width: 'auto',
                 borderRadius: {lg: 5, xs: 3},
-                bgcolor: "lightgray",
+                bgcolor: "gray",
                 maxWidth: "xs",
                 textAlign: "center",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                p: 2,
                 mt: 3,
-                p: 2
             }}>
-                    <TextField
-                        label="Einsatz"
-                        type="number"
-                        color="secondary"
-                        disabled={spinning}
-                        sx={{mt: 2}}
-                        helperText={"Aktuelles Guthaben: " + formatNumber(game.balance) + "€"}
-                        value={currentBet}
-                        InputProps={{inputProps: {min: 1}, inputMode: 'numeric'}}
-                        onChange={(event) => {
-                            const value = Math.max(0, Math.min(game.balance, Number(event.target.value)));
-                            setCurrentBet(value)
-                        }}
-                    />
-                    <Grid container sx={{display: 'flex', justifyContent: 'center', mt: 3, mb: 2}}>
-                        <Grid item xs={4} lg={3}>
-                            <Button
-                                disabled={spinning}
-                                variant="contained"
-                                sx={{
-                                    width: {xs: 75, lg: 100},
-                                    height: {xs: 75, lg: 100},
-                                    color: 'red',
-                                    backgroundColor: 'red',
-                                    "&:hover": {
-                                        backgroundColor: "red"
-                                    },
-                                    border: selectedColor === Color.red ? '5px solid yellow' : 'none',
-                                }}
-                                onClick={() => setSelectedColor(Color.red)}
-                            />
-                        </Grid>
-                        <Grid item xs={4} lg={3}>
-                            <Button
-                                disabled={spinning}
-                                variant="contained"
-                                sx={{
-                                    width: {xs: 75, lg: 100},
-                                    height: {xs: 75, lg: 100},
-                                    color: 'black',
-                                    backgroundColor: 'black',
-                                    "&:hover": {
-                                        backgroundColor: "black"
-                                    },
-                                    border: selectedColor === Color.black ? '5px solid yellow' : 'none',
-                                }}
-                                onClick={() => setSelectedColor(Color.black)}
-                            />
-                        </Grid>
-                        <Grid item xs={4} lg={3}>
-                            <Button
-                                disabled={spinning}
-                                variant="contained"
-                                sx={{
-                                    width: {xs: 75, lg: 100},
-                                    height: {xs: 75, lg: 100},
-                                    color: 'green',
-                                    backgroundColor: 'green',
-                                    "&:hover": {
-                                        backgroundColor: "green"
-                                    },
-                                    border: selectedColor === Color.green ? '5px solid yellow' : 'none',
-                                }}
-                                onClick={() => setSelectedColor(Color.green)}
-                            />
-                        </Grid>
+                <TextField
+                    label="Einsatz"
+                    type="number"
+                    color="secondary"
+                    disabled={spinning}
+                    sx={{mt: 2}}
+                    helperText={"Aktuelles Guthaben: " + formatNumber(game.balance) + "€"}
+                    value={currentBet}
+                    InputProps={{
+                        inputProps: {min: 1},
+                        inputMode: 'numeric',
+                        sx: {color: 'white', fontWeight: 'bold'}
+                    }}
+                    InputLabelProps={{
+                        sx: {color: 'white', fontWeight: 'bold'}
+                    }}
+                    FormHelperTextProps={{
+                        sx: {color: 'white', fontWeight: 'bold'}
+                    }}
+                    onChange={(event) => {
+                        const value = Math.max(0, Math.min(game.balance, Number(event.target.value)));
+                        setCurrentBet(value)
+                    }}
+                />
+                <Grid container sx={{display: 'flex', justifyContent: 'center', mt: 3, mb: 2}}>
+                    <Grid item xs={4} lg={3}>
+                        <Button
+                            disabled={spinning}
+                            variant="contained"
+                            sx={{
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
+                                color: 'red',
+                                backgroundColor: 'red',
+                                "&:hover": {
+                                    backgroundColor: "red"
+                                },
+                                border: selectedColor === Color.red ? '5px solid yellow' : 'none',
+                            }}
+                            onClick={() => setSelectedColor(Color.red)}
+                        />
                     </Grid>
-                    {!spinning && <Typography>{getColorString(winColor)}</Typography>}
-                    {won !== Color.none && <Typography color="green">{formatNumber(bet * 2)}€ Gewonnen!</Typography>}
-                    {lost && <Typography color="red">{formatNumber(bet)}€ Verloren!</Typography>}
-                    {spinning && <Typography>Spinning...</Typography>}
-                    {spinning &&
-                        <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
-                            <Box
-                                className={winColor === Color.red ? "animated-red" : winColor === Color.black ? "animated-black" : "animated-green"}
-                                sx={{
-                                    width: {xs: 75, lg: 100},
-                                    height: {xs: 75, lg: 100},
-                                    "&:hover": {
-                                        backgroundColor: "green"
-                                    },
-                                }}
-                            >
+                    <Grid item xs={4} lg={3}>
+                        <Button
+                            disabled={spinning}
+                            variant="contained"
+                            sx={{
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
+                                color: 'black',
+                                backgroundColor: 'black',
+                                "&:hover": {
+                                    backgroundColor: "black"
+                                },
+                                border: selectedColor === Color.black ? '5px solid yellow' : 'none',
+                            }}
+                            onClick={() => setSelectedColor(Color.black)}
+                        />
+                    </Grid>
+                    <Grid item xs={4} lg={3}>
+                        <Button
+                            disabled={spinning}
+                            variant="contained"
+                            sx={{
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
+                                color: 'green',
+                                backgroundColor: 'green',
+                                "&:hover": {
+                                    backgroundColor: "green"
+                                },
+                                border: selectedColor === Color.green ? '5px solid yellow' : 'none',
+                            }}
+                            onClick={() => setSelectedColor(Color.green)}
+                        />
+                    </Grid>
+                </Grid>
+                {!spinning && <Typography sx={{color: 'white', fontWeight: 'bold'}}>{getColorString(winColor)}</Typography>}
+                {won !== Color.none && <Typography color="'#77fa3c'">{formatNumber(bet * 2)}€ Gewonnen!</Typography>}
+                {lost && <Typography sx={{color: "red", fontWeight: 'bold'}}>{formatNumber(bet)}€ Verloren!</Typography>}
+                {spinning && <Typography sx={{color: 'white', fontWeight: 'bold'}}>Spinning...</Typography>}
+                {spinning &&
+                    <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
+                        <Box
+                            className={winColor === Color.red ? "animated-red" : winColor === Color.black ? "animated-black" : "animated-green"}
+                            sx={{
+                                width: {xs: 75, lg: 100},
+                                height: {xs: 75, lg: 100},
+                                "&:hover": {
+                                    backgroundColor: "green"
+                                },
+                            }}
+                        >
 
-                            </Box>
                         </Box>
-                    }
-                    <Box>
-                        <Button variant="contained" color="secondary" sx={{mt: 2, width: '50%'}} onClick={startSpin}
-                                disabled={spinning}>
-                            Drehen
-                        </Button>
                     </Box>
+                }
+                <Box>
+                    <Button variant="contained" sx={{mt: 2, width: '50%'}} onClick={startSpin}
+                            disabled={spinning}>
+                        Drehen
+                    </Button>
+                </Box>
             </Box>
         );
     }

@@ -9,7 +9,6 @@ import {useGame} from "../context/GameContext.ts";
 import {Divider, IconButton, SwipeableDrawer, useMediaQuery} from "@mui/material";
 import {formatNumber} from "./Home/BalanceComponent.tsx";
 import {useState} from "react";
-import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import SaveIcon from '@mui/icons-material/Save';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -64,7 +63,7 @@ const Header = () => {
             html: `<b>Spielprinzip</b> </br> Kaufe Klick Upgrades um dein Einkommen pro Klick zu erhöhen. Die passiven Einkommen Upgrades erhöhen dein Einkommen pro Sekunde, falls du mal nicht klicken möchtest. </br> </br> <b>Features</b> </br> Kaufe Aktien oder spiele Roulette um mit deinem Geld ein bisschen zu spielen. Forsche fleißig, damit deine Upgrades noch stärker werden! </br> </br> <b>Geeky Coins</b> </br> Setze deinen Spielstand zurück um GeekyCoins zu erhalten. Diese gewähren dir einen großen Bonus auf dein Einkommen!`,
             icon: 'info',
             confirmButtonText: 'Verstanden',
-            confirmButtonColor: '#df742f',
+            confirmButtonColor: '#489726',
             showConfirmButton: true,
         })
     }
@@ -73,6 +72,7 @@ const Header = () => {
         withReactContent(Swal).fire({
             title: <i>Erfolgreich gespeichert</i>,
             icon: 'success',
+            confirmButtonColor: '#489726',
             showConfirmButton: true,
         })
     }
@@ -84,7 +84,9 @@ const Header = () => {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ja',
-            cancelButtonText: 'Nein'
+            cancelButtonText: 'Nein',
+            confirmButtonColor: '#489726',
+            cancelButtonColor: '#000000'
         }).then((result) => {
             if (result.isConfirmed) {
                 handleRestart(0)
@@ -100,7 +102,9 @@ const Header = () => {
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Ja',
-            cancelButtonText: 'Nein'
+            cancelButtonText: 'Nein',
+            confirmButtonColor: '#489726',
+            cancelButtonColor: '#000000'
         }).then((result) => {
             if (result.isConfirmed) {
                 handleRestart(game.geekyCoins + availableCoins)
@@ -114,19 +118,14 @@ const Header = () => {
         showSaveSuccess()
     }
 
-    const redirect = () => {
-        window.location.href = 'https://www.progeek.de';
-    };
-
     return (
         <Box sx={{flexGrow: 1}}>
             {!isXsScreen && <AppBar position="static">
-                <Toolbar sx={{backgroundColor: '#909090'}}>
-                    <IconButton onClick={redirect}><HomeIcon/></IconButton>
+                <Toolbar sx={{ background: 'linear-gradient(to right, #000000, #0f9b0f), #909090' }}>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1, ml: 2}}>
                         Geeky Clicker
                     </Typography>
-                    <IconButton sx={{mr: '20px'}} onClick={showInfo}><InfoIcon/></IconButton>
+                    <IconButton sx={{mr: '20px', color: "white"}} onClick={showInfo}><InfoIcon/></IconButton>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleGeekyCoins}>GeekyCoins erhalten</Button>
                     <Button sx={{mr: '20px'}} color="inherit" onClick={handleSave}>Speichern</Button>
                     <Button color="inherit" onClick={showRestart}>Neustarten</Button>
@@ -135,11 +134,11 @@ const Header = () => {
             {isXsScreen &&
                 <>
                     <AppBar position="static">
-                        <Toolbar sx={{backgroundColor: '#909090'}}>
+                        <Toolbar sx={{ background: 'linear-gradient(to right, #000000, #0f9b0f), #909090' }}>
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                 Geeky Clicker
                             </Typography>
-                            <IconButton onClick={toggleMenu} sx={{mr: 2}}>
+                            <IconButton onClick={toggleMenu} sx={{mr: 2, color: 'white'}}>
                                 <MenuIcon/>
                             </IconButton>
                         </Toolbar>
@@ -153,8 +152,6 @@ const Header = () => {
                         >
                             <IconButton onClick={toggleMenu}><MenuIcon/></IconButton>
                             <Divider/>
-
-                            <Button color="inherit" onClick={redirect} startIcon={<HomeIcon/>}>Zu Progeek</Button>
                             <Button color="inherit" onClick={showInfo} startIcon={<InfoIcon/>}>Informationen</Button>
                             <Button color="inherit" onClick={handleGeekyCoins}
                                     startIcon={<PaidIcon/>}>GeekyCoins</Button>

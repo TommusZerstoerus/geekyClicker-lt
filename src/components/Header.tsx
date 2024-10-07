@@ -9,7 +9,6 @@ import {useGame} from "../context/GameContext.ts";
 import {Divider, IconButton, SwipeableDrawer, useMediaQuery} from "@mui/material";
 import {formatNumber} from "./Home/BalanceComponent.tsx";
 import {useState} from "react";
-import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import SaveIcon from '@mui/icons-material/Save';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -119,15 +118,10 @@ const Header = () => {
         showSaveSuccess()
     }
 
-    const redirect = () => {
-        window.location.href = 'https://www.progeek.de';
-    };
-
     return (
         <Box sx={{flexGrow: 1}}>
             {!isXsScreen && <AppBar position="static">
                 <Toolbar sx={{ background: 'linear-gradient(to right, #000000, #0f9b0f), #909090' }}>
-                    <IconButton sx={{color: 'white'}} onClick={redirect}><HomeIcon/></IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1, ml: 2}}>
                         Geeky Clicker
                     </Typography>
@@ -158,8 +152,6 @@ const Header = () => {
                         >
                             <IconButton onClick={toggleMenu}><MenuIcon/></IconButton>
                             <Divider/>
-
-                            <Button color="inherit" onClick={redirect} startIcon={<HomeIcon/>}>Zu Progeek</Button>
                             <Button color="inherit" onClick={showInfo} startIcon={<InfoIcon/>}>Informationen</Button>
                             <Button color="inherit" onClick={handleGeekyCoins}
                                     startIcon={<PaidIcon/>}>GeekyCoins</Button>

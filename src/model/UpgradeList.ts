@@ -2,7 +2,7 @@ export const UpgradeBonusList: Record<number, number> = {
     0: 1, // Kotlin lernen
     1: 10, // Cache leeren
     2: 100, // Merge Konflikte lösen
-    3: 500, // Boris nach Hilfe fragen
+    3: 500, // Vim Lernen
     4: 1000, // Force Push auf Main
     5: 10, // Einen weiteren Monitor aufstellen
     6: 150, // Musik hören
@@ -15,7 +15,7 @@ export const UpgradeMileStoneList: Record<number, number> = {
     0: UpgradeBonusList[0] * 1000, // Kotlin lernen
     1: UpgradeBonusList[1] * 1000, // Cache leeren
     2: UpgradeBonusList[2] * 1000, // Merge Konflikte lösen
-    3: UpgradeBonusList[3] * 1000, // Boris nach Hilfe fragen
+    3: UpgradeBonusList[3] * 1000, // Vim lernen
     4: UpgradeBonusList[4] * 1000, // Force Push auf Main
     5: UpgradeBonusList[5] * 1000, // Einen weiteren Monitor aufstellen
     6: UpgradeBonusList[6] * 1000, // Musik hören
@@ -28,7 +28,7 @@ export const UpgradeNameList: Record<number, string> = {
     0: "Kotlin lernen",
     1: "Cache leeren",
     2: "Merge Konflikte lösen",
-    3: "Boris nach Hilfe fragen",
+    3: "Vim lernen",
     4: "Force Push auf Main",
     5: "Einen weiteren Monitor aufstellen",
     6: "Musik hören",
@@ -41,7 +41,7 @@ export const BasePriceList: Record<number, number> = {
     0: 10, // Kotlin lernen
     1: 100, // Cache leeren
     2: 500, // Merge Konflikte lösen
-    3: 1000, // Boris nach Hilfe fragen
+    3: 1000, // Vim lernen
     4: 2000, // Force Push auf Main
     5: 1000, // Einen weiteren Monitor aufstellen
     6: 10000, // Musik hören

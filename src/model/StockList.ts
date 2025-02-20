@@ -4,4 +4,5 @@ export const stocks = [
     {id: 2, name: 'GOOGL', price: 100000},
     {id: 3, name: 'AMZN', price: 500000},
     {id: 4, name: 'TSLA', price: 1000000},
+    {id: 5, name: 'RHMT', price: 40000000},
 ]

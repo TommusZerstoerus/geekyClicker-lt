@@ -46,7 +46,6 @@ const ResearchList = () => {
             <Box sx={{
                 mt: 3,
                 p: 2,
-                bgcolor: "gray",
                 borderRadius: {lg: 5, xs: 3},
             }}>
                     <Box sx={{

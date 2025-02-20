@@ -200,7 +200,7 @@ const Home = () => {
                             position: 'absolute',
                             top: '-13px',
                             left: "1rem",
-                            background: '#414345',
+                            background: '#181818',
                             color: "white",
                             padding: '2px 8px',
                             borderRadius: '4px',
@@ -214,14 +214,14 @@ const Home = () => {
                     </Box>
                     <Box sx={{display: 'flex', justifyContent: 'center'}}>
                         <animated.img
-                            style={{cursor: 'pointer', transform, userSelect: 'none', width: '40%'}}
+                            style={{cursor: 'pointer', transform, userSelect: 'none', width: '40%', objectFit: "cover"}}
                             onClick={() => {
                                 handleClick()
                                 setWobble(true)
                             }}
                             draggable={false}
                             onAnimationEnd={() => setWobble(false)}
-                            src={icon}
+                            src={"clicker.png"}
                             alt="Logo"
                         />
                     </Box>
@@ -271,7 +271,7 @@ const Home = () => {
                             position: 'absolute',
                             top: '-13px',
                             left: "1rem",
-                            background: '#414345',
+                            background: '#181818',
                             color: "white",
                             padding: '2px 8px',
                             borderRadius: '4px'

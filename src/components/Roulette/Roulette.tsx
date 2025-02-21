@@ -109,7 +109,7 @@ const RouletteTable = () => {
             <Box sx={{
                 width: 'auto',
                 borderRadius: {lg: 5, xs: 3},
-                bgcolor: "gray",
+                bgcolor: "#181818",
                 maxWidth: "xs",
                 textAlign: "center",
                 display: "flex",
@@ -122,9 +122,22 @@ const RouletteTable = () => {
                 <TextField
                     label="Einsatz"
                     type="number"
-                    color="secondary"
+                    color="primary"
                     disabled={spinning}
-                    sx={{mt: 2}}
+                    sx={{
+                        mt: 2,
+                        "& .MuiOutlinedInput-root": {
+                            "& fieldset": {
+                                borderColor: "white",
+                            },
+                            "&:hover fieldset": {
+                                borderColor: "white",
+                            },
+                            "&.Mui-focused fieldset": {
+                                borderColor: "white",
+                            },
+                        },
+                    }}
                     helperText={"Aktuelles Guthaben: " + formatNumber(game.balance) + "€"}
                     value={currentBet}
                     InputProps={{

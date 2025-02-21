@@ -88,10 +88,11 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
     const adjustedUpgradeBonus = tenTimes ? formatNumber(upgradeBonus * 10) : formatNumber(upgradeBonus);
 
     return (
-        <Container maxWidth="lg" style={{textAlign: "center"}}>
+        <Container maxWidth="lg">
             <Box
                 borderRadius={8}
                 boxShadow={3}
+                maxHeight={170}
                 p={2}
                 sx={{
                     background: 'black',
@@ -103,20 +104,22 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
                     border: '2px solid #49da3a',
                 }}
             >
-                <Typography variant="body1">
+                <Typography variant="body2">
                     {name}
                 </Typography>
-                <Typography variant="body2" color={researchUpgrade ? "gold" : ""}>
+                <Typography variant="caption" color={researchUpgrade ? "gold" : ""}>
                     {type === UpgradeType.CLICK ? `(+${adjustedUpgradeBonus}€)` : `(+${adjustedUpgradeBonus}€/s)`}
                 </Typography>
-                <Typography variant="body2">
+                <Typography variant="caption">
                     Stufe {level}
                 </Typography>
                 {balance >= upgradePrice ?
-                    <Button startIcon={<ShoppingCart/>} variant="contained"
-                            onClick={buyUpgrade}>{upgradePriceText}€</Button> :
-                    <Button startIcon={<ShoppingCart/>} variant="contained"
-                            disabled>{upgradePriceText}€</Button>}
+                    <Button startIcon={<ShoppingCart/>} variant="contained" onClick={buyUpgrade}>
+                        {upgradePriceText}€
+                    </Button> :
+                    <Button startIcon={<ShoppingCart/>} variant="contained" disabled>
+                        {upgradePriceText}€
+                    </Button>}
                 <Stack marginTop={'10px'} direction="row" spacing={1} alignItems="center">
                     <Typography>1x</Typography>
                     <FormControlLabel
@@ -139,7 +142,8 @@ const UpgradeBox = ({id, name, type}: ClickUpgradeProps) => {
                         variant="determinate"
                         value={level % 100}
                     />
-                    <Typography variant="body2">{level % 100} / 100  {type === UpgradeType.CLICK ? `(+${formatNumber(UpgradeMileStoneList[id])}€)` : `(+${formatNumber(UpgradeMileStoneList[id])}€/s)`}</Typography>
+                    <Typography variant="body2">{level % 100} /
+                        100 {type === UpgradeType.CLICK ? `(+${formatNumber(UpgradeMileStoneList[id])}€)` : `(+${formatNumber(UpgradeMileStoneList[id])}€/s)`}</Typography>
                 </Box>
             </Box>
         </Container>

@@ -1,9 +1,8 @@
-import {Container, Divider, Grid, TextField} from "@mui/material";
+import {Container, Divider, Grid, TextField, useMediaQuery} from "@mui/material";
 import Header from "../components/Header.tsx";
 import ClickUpgradeList from "../components/ClickUpgradeList.tsx";
 import IncomeUpgradeList from "../components/IncomeUpgradeList.tsx";
 import Box from "@mui/material/Box";
-import icon from "../assets/icon.svg";
 import {useEffect, useRef, useState} from "react";
 import {useGame} from "../context/GameContext.ts";
 import BalanceComponent from "../components/Home/BalanceComponent.tsx";
@@ -19,6 +18,7 @@ import {researchList} from "../model/ResearchList.ts";
 import GeekyCoinsComponent from "../components/Home/GeekyCoinsComponent.tsx";
 import {jsHack} from "../model/jsHack.ts";
 import Typography from "@mui/material/Typography";
+import {theme} from "../themes/theme.ts";
 
 const elementValueToName = (value: number) => {
     switch (value) {
@@ -45,6 +45,7 @@ const Home = () => {
     const [nextWordIndex, setNextWordIndex] = useState(0);
     const [hackText, setHackText] = useState("");
     const preRef = useRef<HTMLPreElement>(null);
+    const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
     const {transform} = useSpring({
         from: {transform: 'scale(1)'},
@@ -193,8 +194,8 @@ const Home = () => {
     return (
         <>
             <Header/>
-            <Box sx={{display: "flex", flexDirection: {xs: "column", lg: "row"}, height: "95vh"}}>
-                <Container sx={{textAlign: 'center', width: {lg: "60%"}}}>
+            <Box sx={{display: "flex", flexDirection: {xs: "column", xl: "row"}, height: "90vh"}}>
+                <Container sx={{textAlign: 'center', width: {xl: "60%"}}}>
                     <Box sx={{border: '2px solid white', borderRadius: '8px', p: 2, mt: 2, mb: 3, position: 'relative'}}>
                         <Typography sx={{
                             position: 'absolute',
@@ -214,7 +215,7 @@ const Home = () => {
                     </Box>
                     <Box sx={{display: 'flex', justifyContent: 'center'}}>
                         <animated.img
-                            style={{cursor: 'pointer', transform, userSelect: 'none', width: '40%', objectFit: "cover"}}
+                            style={{cursor: 'pointer', transform, userSelect: 'none', width: isLargeScreen ? "20%" : "40%", objectFit: "cover"}}
                             onClick={() => {
                                 handleClick()
                                 setWobble(true)
@@ -239,7 +240,7 @@ const Home = () => {
                             position: 'relative',
                         }}
                     >
-                        <pre ref={preRef} style={{textAlign: 'left', height: '400px', overflowY: 'auto'}}>
+                        <pre ref={preRef} style={{textAlign: 'left', height: '200px', overflowY: 'auto'}}>
                             {hackText}
                         </pre>
                         <Divider color="green"></Divider>
@@ -259,7 +260,7 @@ const Home = () => {
                 </Container>
                 <Container
                     sx={{
-                        width: {lg: "40%"},
+                        width: {xl: "40%"},
                         textAlign: "center",
                         flex: "1",
                         display: "flex",
